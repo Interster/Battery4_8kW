@@ -13,7 +13,6 @@ Voorbeeld uit paragraaf 5 van RS-232 handleiding van die battery:
 
 Stuur volgende string HEX getalle na die battery:
 
-`7E 32 30 30 31 34 36 34 32 45 30 30 32 30 31 46 44 33 35 0D`
 `7E 32 35 30 30 34 36 34 32 45 30 30 32 30 31 46 44 33 31 0D`
 
 Dit beteken
@@ -37,36 +36,110 @@ Dit beteken
 
 Kry dan terug:
 
-`7e3235303134363030323038363030303130463044393830443938304431463044394330444134304441313044393630443132304442413044393830443942304441333044423230444135304441413036304235413042353530423531304235353042363330423631303030304342363932373130303332373130303030343237313030303030353434443030303041464131453039390d`
+`7E ` (SOI)
+
+`32 35 ` (VER, Weergawe 25H oftewel V2.5)
+
+`30 31` (ADR, Battery pak adres 01)
+
+`34 36 ` (CID1, 46H, Litium battery)
+
+`30 30 ` (RTN, 00H)
+
+`32 30 38 36 ` (Lengte van antwoord)
+
+`30 30 ` (DATAINFO)
+
+`30 31 ` (Batterypak nommer 01H)
+
+`30 46 ` (Aantal batteryselle M, 0FH in heksadesimaal, oftewel 16 Battery selle)
+
+`30 44 39 38 `  Battery sel millivolts 1, 0D98H of 3480 millivolts
+
+`30 44 39 38 `  Battery sel millivolts 2
+
+`30 44 31 46 `  Battery sel millivolts 3
+
+`30 44 39 43 ` Battery sel millivolts 4
+
+`30 44 41 34 ` Battery sel millivolts 5
+
+`30 44 41 31 ` Battery sel millivolts 6
+
+`30 44 39 36 ` Battery sel millivolts 7
+
+`30 44 31 32 ` Battery sel millivolts 8
+
+`30 44 42 41 ` Battery sel millivolts 9
+
+`30 44 39 38 ` Battery sel millivolts 10
+
+`30 44 39 42 ` Battery sel millivolts 11
+
+`30 44 41 33 ` Battery sel millivolts 12
+
+`30 44 42 32 ` Battery sel millivolts 13
+
+`30 44 41 35 ` Battery sel millivolts 14
+
+`30 44 41 41 ` Battery sel millivolts 15
+
+`30 36 30 42 ` Battery sel millivolts 16
+
+`35 41 ` 
+
+`30 42 35 35 ` Temperatuur 1 0B55H, = 29.01 grade Celcius 
+
+`30 42 35 31 `
+
+`30 42 35 35 `
+
+`30 42 36 33 `
+
+`30 42 36 31 `
+
+`30 30 30 30 ` Batterypak Stroom 0000H = 0 x 10milliAmpere = 0 mA.
+
+`43 42 36 39 ` Batterypak totale Volts (spanning) = CB69H, 52073 mV of 52.073V
+
+`32 37 31 30 ` Oorblywende kapasiteit 2710H = 100.00Ah
+
+`30 33 ` Sogenaamde "user defined number P", 03H
+
+`32 37 31 30` Battery pak volle kapasiteit 2710H, oftewel 100.00Ah
+
+` 30 30 30 34` Aantal ontladingsiklusse, 0004H, oftewel 4 siklusse
+
+` 32 37 31 30` Batterypak ontwerpskapasiteit, 2710H, oftewel 100.00Ah  
+
+` 30 30 30 30` 
+
+`35 34 34 44 ` 
+
+`30 30 30 30 ` 
+
+`41 46 41 31 ` 
+
+`45 30 39 39 ` CHKSUM
+
+`0D` EOI End of Information (Einde van inligting)
 
 
-`7E 32 30 30 31 34 36 30 30 43 30 36 45 31 31 30 31 30
-46 30 44 34 35 30 44 34 34 30 44 34 35 30 44 34 34 30 44 34 35 30 44 34
-34 30 44 33 45 30 44 34 35 30 44 34 41 30 44 34 41 30 44 34 42 30 44 34
-41 30 44 34 41 30 44 34 41 30 44 34 41 30 35 30 42 43 33 30 42 43 33 30
-42 43 33 30 42 43 44 30 42 43 44 30 30 30 30 43 37 32 35 42 46 36 38 30
-32 43 33 35 30 30 30 30 32 45 35 35 33 0D`
+
+
 
 Die oorblywende energie in die battery word gegee deur:
 
-`42 46 36 38`
+`32 37 31 30 `  Oorblywende kapasiteit 2710H = 100.00Ah
 
-in die string wat teruggestuur word hierbo.  Die volledige analise van die string hierbo word gegee in die Pylontech RS232 handleiding in paragraaf 5.
+in die string wat teruggestuur word hierbo.  Die volledige analise van die string hierbo word gegee in die battery handleiding in paragraaf 5.  Die analise hierbo is gedoen vanaf 'n meting op 4 Aug 2020.
 
-Die getalle hierbo is die heksadesimale waardes van die ASCII tabel.  Dus is `42`eintlik die string `B.`  Net so is die hele string dan:  `BF68`
+Die getalle hierbo is die heksadesimale waardes van die ASCII tabel.  Dus is `32`eintlik die string `2.`  Net so is die hele string dan:  `2710`
 
-Hierdie string is 'n heksadesimale getal wat nou teruggelei kan word na 'n desimale getal.  `BF68H` waar `H`  die heksadesimale getal beteken, is `49000`.  Hierdie getal is die waarde in mAh van die battery.  Dus om die orige energie in kWh te bereken word die volgende berekening gedoen:
+Hierdie string is 'n heksadesimale getal wat nou teruggelei kan word na 'n desimale getal.  `2710H` waar `H`  die heksadesimale getal beteken, is `10000`.  Hierdie getal is die waarde in Ah x 100 van die battery.  Dus om die orige energie in kWh te bereken word die volgende berekening gedoen:
 
-$Energie = \frac{49000mAh}{1000} \times 48V = 2352W = 2.352kW$
-
-Hierdie berekening neem aan dit is 'n 48V battery.
-
-Dus is die lading persentasie (die "State of Charge" of SOC) gelyk aan:
-
-$SOC = \frac{2.352W}{2400W} = 0.98 = 98\%$
-
-Hierdie berekening neem aan dit is 'n 2.4kWh battery oftewel die Pylontech US2000.
-
-
-
-### 
+Onthou dat die volle battery (hierdie was twee 4.8kWh batterye in parallel) 'n 100Ah kapasiteit het.
+$$
+SOC = \frac{100Ah}{100Ah} = 1 = 100\%
+$$
+Die battery was dus vol.
