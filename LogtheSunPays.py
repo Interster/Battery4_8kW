@@ -82,7 +82,7 @@ leer.write('DatumTyd, Stroom mA_100, Spanning mV, Energie oor mAh, Totale energi
 
 while (datetime.datetime.now() - begintyd).seconds < totalesekondes:
     # Stuur data 1200 baud.  Dit moet eers teen hierdie spoed gestuur word
-    with serial.Serial('/dev/ttyUSB0', 1200, timeout=5.0) as ser:
+    with serial.Serial('/dev/ttyUSB0', 9600, timeout=5.0) as ser:
         x = ser.write(unhexlify(bytestosend)) # Stuur opdrag na die battery
         uitstring = ser.read(1000)
         a = uitstring.hex()
