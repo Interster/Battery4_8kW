@@ -47,15 +47,15 @@ def skryfLogLynBattery(leesvanbattery):
     a = leesvanbattery
     
     #Stroom in milliAmpere/100.  Dus vermenigvuldig met 100 en deel deur 1000 om Ampere te kry
-    stroom = uitsetGetalHeksStringSignInt(a[-78:-70])
+    stroom = uitsetGetalHeksStringSignInt(a[210:218])
     #Spanning in milliVolt van hele battery
-    spanning = uitsetGetalHeksString(a[-70:-62])
+    spanning = uitsetGetalHeksString(a[218:226])
     #Oorblywende energie in battery
-    energieOor = uitsetGetalHeksString(a[-62:-54])
+    energieOor = uitsetGetalHeksString(a[226:234])
     # Totale energie in battery
-    energietotaal = uitsetGetalHeksString(a[-50:-42])
+    energietotaal = uitsetGetalHeksString(a[238:246])
     # Siklusse
-    siklusse = uitsetGetalHeksString(a[-42:-34])
+    siklusse = uitsetGetalHeksString(a[246:254])
         
     uitsetloglyn = str(stroom) + ',' + str(spanning) + ',' + str(energieOor) + ',' + str(energietotaal) + ',' + str(siklusse)
     
@@ -69,15 +69,15 @@ import serial
 
 # Log parameters
 monsterfrekwensie = 30 # [sekondes]
-totalesekondes = 2*60 #24*60*60 # [sekondes]
+totalesekondes = 24*60*60 # [sekondes]
 
 # Opdrag vanaf paragraaf 5 in seriepoort handleiding:  Lees analoog data
-bytestosend = '7E3230303134363432453030323031464433350D'
+bytestosend = '7E3235303034363432453030323031464433310D'
 
 begintyd = datetime.datetime.now()
 
 # Maak leer oop
-leer = open('PylonTech_' + str(datetime.date.today()) + '.log', 'w')
+leer = open('SunPays_' + str(datetime.date.today()) + '.log', 'w')
 leer.write('DatumTyd, Stroom mA_100, Spanning mV, Energie oor mAh, Totale energie mAh, Siklusse\n')
 
 while (datetime.datetime.now() - begintyd).seconds < totalesekondes:

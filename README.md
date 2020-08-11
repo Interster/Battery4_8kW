@@ -9,6 +9,8 @@ Hier is die ASCII tabel.  Die battery stuur en ontvang data in Heksadesimale get
 
 ![asciifull](asciifull.gif)
 
+### Voorbeeld 1
+
 Voorbeeld uit paragraaf 5 van RS-232 handleiding van die battery:
 
 Stuur volgende string HEX getalle na die battery:
@@ -36,83 +38,83 @@ Dit beteken
 
 Kry dan terug:
 
-`7E ` (SOI)
+`7E ` (SOI) [0:2]
 
-`32 35 ` (VER, Weergawe 25H oftewel V2.5)
+`32 35 ` (VER, Weergawe 25H oftewel V2.5) [2:6]
 
-`30 31` (ADR, Battery pak adres 01)
+`30 31` (ADR, Battery pak adres 01) [6:10]
 
-`34 36 ` (CID1, 46H, Litium battery)
+`34 36 ` (CID1, 46H, Litium battery) [10:14]
 
-`30 30 ` (RTN, 00H)
+`30 30 ` (RTN, 00H) [14:18]
 
-`32 30 38 36 ` (Lengte van antwoord)
+`32 30 38 36 ` (Lengte van antwoord) [18:26]
 
-`30 30 ` (DATAINFO)
+`30 30 ` (DATAINFO) [26:30]
 
-`30 31 ` (Batterypak nommer 01H)
+`30 31 ` (Batterypak nommer 01H) [30:34]
 
-`30 46 ` (Aantal batteryselle M, 0FH in heksadesimaal, oftewel 16 Battery selle)
+`30 46 ` (Aantal batteryselle M, 0FH in heksadesimaal, oftewel 15 Battery selle) [34:38]
 
-`30 44 39 38 `  Battery sel millivolts 1, 0D98H of 3480 millivolts
+`30 44 39 38 `  Battery sel millivolts 1, 0D98H of 3480 millivolts [38:46]
 
-`30 44 39 38 `  Battery sel millivolts 2
+`30 44 39 38 `  Battery sel millivolts 2 [46:54]
 
-`30 44 31 46 `  Battery sel millivolts 3
+`30 44 31 46 `  Battery sel millivolts 3 [54:62]
 
-`30 44 39 43 ` Battery sel millivolts 4
+`30 44 39 43 ` Battery sel millivolts 4 [62:70]
 
-`30 44 41 34 ` Battery sel millivolts 5
+`30 44 41 34 ` Battery sel millivolts 5 [70:78]
 
-`30 44 41 31 ` Battery sel millivolts 6
+`30 44 41 31 ` Battery sel millivolts 6 [78:86]
 
-`30 44 39 36 ` Battery sel millivolts 7
+`30 44 39 36 ` Battery sel millivolts 7 [86:94]
 
-`30 44 31 32 ` Battery sel millivolts 8
+`30 44 31 32 ` Battery sel millivolts 8 [94:102]
 
-`30 44 42 41 ` Battery sel millivolts 9
+`30 44 42 41 ` Battery sel millivolts 9 [102:110]
 
-`30 44 39 38 ` Battery sel millivolts 10
+`30 44 39 38 ` Battery sel millivolts 10 [110:118]
 
-`30 44 39 42 ` Battery sel millivolts 11
+`30 44 39 42 ` Battery sel millivolts 11 [118:126]
 
-`30 44 41 33 ` Battery sel millivolts 12
+`30 44 41 33 ` Battery sel millivolts 12 [126:134]
 
-`30 44 42 32 ` Battery sel millivolts 13
+`30 44 42 32 ` Battery sel millivolts 13 [134:142]
 
-`30 44 41 35 ` Battery sel millivolts 14
+`30 44 41 35 ` Battery sel millivolts 14 [142:150]
 
-`30 44 41 41 ` Battery sel millivolts 15
+`30 44 41 41 ` Battery sel millivolts 15 [150:158]
 
-`30 36 30 42 ` Battery sel millivolts 16
+`30 36` Aantal termperatuur metings oftewel 6 metings [158:162]
 
-`35 41 ` 
+`30 42 35 41 ` Temperatuur 1 [162:170]
 
-`30 42 35 35 ` Temperatuur 1 0B55H, = 29.01 grade Celcius 
+`30 42 35 35 ` Temperatuur 2 0B55H, = 29.01 grade Celcius [170:178]
 
-`30 42 35 31 `
+`30 42 35 31 ` [178:186]
 
-`30 42 35 35 `
+`30 42 35 35 ` [186:194]
 
-`30 42 36 33 `
+`30 42 36 33 ` [194:202]
 
-`30 42 36 31 `
+`30 42 36 31 ` [202:210]
 
-`30 30 30 30 ` Batterypak Stroom 0000H = 0 x 10milliAmpere = 0 mA.
+`30 30 30 30 ` Batterypak Stroom 0000H = 0 x 10milliAmpere = 0 mA. [210:218]
 
-`43 42 36 39 ` Batterypak totale Volts (spanning) = CB69H, 52073 mV of 52.073V
+`43 42 36 39 ` Batterypak totale Volts (spanning) = CB69H, 52073 mV of 52.073V [218:226]
 
-`32 37 31 30 ` Oorblywende kapasiteit 2710H = 100.00Ah
+`32 37 31 30 ` Oorblywende kapasiteit 2710H = 100.00Ah [226:234]
 
-`30 33 ` Sogenaamde "user defined number P", 03H
+`30 33 ` Sogenaamde "user defined number P", 03H [234:238]
 
-`32 37 31 30` Battery pak volle kapasiteit 2710H, oftewel 100.00Ah
+`32 37 31 30` Battery pak volle kapasiteit 2710H, oftewel 100.00Ah [238:246]
 
-` 30 30 30 34` Aantal ontladingsiklusse, 0004H, oftewel 4 siklusse
+`30 30 30 34` Aantal ontladingsiklusse, 0004H, oftewel 4 siklusse [246:254]
 
-` 32 37 31 30` Batterypak ontwerpskapasiteit, 2710H, oftewel 100.00Ah  
+`32 37 31 30` Batterypak ontwerpskapasiteit, 2710H, oftewel 100.00Ah [254:262] 
 
-` 30 30 30 30` 
+`30 30 30 30` 
 
 `35 34 34 44 ` 
 
@@ -145,8 +147,15 @@ $$
 Die battery was dus vol.
 
 
+### Voorbeeld 2
+
+Vra vir die laaste battery:
 
 Met FF:
-7E3235303034363432453030324646464430360D
+
+`7E3235303034363432453030324646464430360D`
 
 7e3235303134363030323038363030303130463044323830443242304431303044324130443241304432373044323730443042304432413044323830443241304432413044324230443241304432383036304235383042353330423444304235313042354430423545303030304335333332373130303332373130303030343237313030303030353434443030303041464131453045390d
+
+
+### Voorbeeld 3
