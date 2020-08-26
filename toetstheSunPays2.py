@@ -1,3 +1,37 @@
+#%%
+
+# Toets basiese skryf na die seriepoort
+import serial
+ser = serial.Serial('/dev/ttyUSB0')  # open serial port
+print(ser.name)         # check which port was really used
+#ser.write(b'hello')     # write a string
+ser.close()
+
+#%%
+from binascii import unhexlify
+
+# Opdrag vanaf paragraaf 5 in seriepoort handleiding
+bytestosend = '7E3235303034363432453030323031464433310D'
+
+# Stuur data 1200 baud.  Dit moet eers teen hierdie spoed gestuur word
+with serial.Serial('/dev/ttyUSB0', 9600, timeout=5.0) as ser:
+    x = ser.write(unhexlify(bytestosend)) # Stuur opdrag na die battery
+    uitstring = ser.read(5000)
+    a = uitstring.hex()
+
+# Druk die greepstring (bytestring)
+print('Greepstring')
+print(uitstring)
+print('Hex string')
+print(a)
+# %%
+print(a[246:254])
+print(uitsetGetalHeksString(a[246:254]))
+
+print(a[210:218])
+print(uitsetGetalHeksStringSignInt(a[210:218]))
+
+# %%
 def twos_complement(hexstr,bits):
     # Verander die heksadesimale getal na 'n heelgetal met 'n teken oftewel 'n "signed integer"
     # In 'n n-greep twee komplement getallevoorstelling, het die grepe die waardes:
@@ -42,7 +76,6 @@ def uitsetGetalHeksStringSignInt(insetstring):
     
     return uitsetgetal
 
-
 def skryfLogLynBattery(leesvanbattery):
     a = leesvanbattery
     
@@ -61,7 +94,7 @@ def skryfLogLynBattery(leesvanbattery):
     
     return uitsetloglyn
 
-
+# %%
 import datetime
 import time
 from binascii import unhexlify
@@ -69,26 +102,26 @@ import serial
 
 # Log parameters
 monsterfrekwensie = 30 # [sekondes]
-totalesekondes = 24*60*60 # [sekondes]
+totalesekondes = 12*60*60 # [sekondes]
 
 # Opdrag vanaf paragraaf 5 in seriepoort handleiding:  Lees analoog data
 bytestosend = '7E3235303034363432453030323031464433310D'
 
 begintyd = datetime.datetime.now()
 
+
+# %%
 # Maak leer oop
 leer = open('SunPays_' + str(datetime.date.today()) + '.log', 'w')
 leer.write('DatumTyd, Stroom mA_100, Spanning mV, Energie oor mAh, Totale energie mAh, Siklusse\n')
 
 while (datetime.datetime.now() - begintyd).seconds < totalesekondes:
-    # Stuur data 9600 baud.  Dit moet eers teen hierdie spoed gestuur word
     with serial.Serial('/dev/ttyUSB0', 9600, timeout=5.0) as ser:
         x = ser.write(unhexlify(bytestosend)) # Stuur opdrag na die battery
         uitstring = ser.read(5000)
         a = uitstring.hex()
-        print(a)
-    
-    print(str(datetime.datetime.now()) + ' Log lesing')
+
+    print('Log\n')
 
     # Log data na leer
     leer.write(str(datetime.datetime.now()) + ',' + skryfLogLynBattery(a))
@@ -96,3 +129,4 @@ while (datetime.datetime.now() - begintyd).seconds < totalesekondes:
     time.sleep(monsterfrekwensie - 5)
 
 leer.close()
+# %%
