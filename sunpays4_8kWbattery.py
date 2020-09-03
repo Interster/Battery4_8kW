@@ -76,7 +76,7 @@ def leesStatusBattery():
     begintyd = datetime.datetime.now()
 
     # Kolomme van die inligting wat teruggestuur word
-    leer.write('DatumTyd, Stroom mA_100, Spanning mV, Energie oor mAh, Totale energie mAh, Siklusse\n')
+    # 'DatumTyd, Stroom mA_100, Spanning mV, Energie oor mAh, Totale energie mAh, Siklusse'
 
     # Stuur data 9600 baud.  Dit moet eers teen hierdie spoed gestuur word
     with serial.Serial('/dev/ttyUSB0', 9600, timeout=5.0) as ser:
